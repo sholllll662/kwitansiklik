@@ -1,6 +1,7 @@
 "use client";
 
 import { NumericTextField } from "@/components/form/NumericTextField";
+import { TEXT_INPUT_CLASS } from "@/components/form/styles";
 import type { DiscountType } from "@/components/form/types";
 
 interface DiscountTaxFieldsProps {
@@ -40,7 +41,7 @@ export function DiscountTaxFields({
               onChange={(e) =>
                 onDiscountTypeChange(e.target.value as DiscountType)
               }
-              className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+              className={TEXT_INPUT_CLASS}
             >
               <option value="none">Tidak ada</option>
               <option value="percent">Persen (%)</option>
@@ -61,12 +62,12 @@ export function DiscountTaxFields({
       </div>
 
       <div>
-        <label className="flex items-center gap-2">
+        <label className="flex items-center gap-2 py-2">
           <input
             type="checkbox"
             checked={taxEnabled}
             onChange={(e) => onTaxEnabledChange(e.target.checked)}
-            className="h-4 w-4"
+            className="h-5 w-5"
           />
           <span className="text-sm font-semibold text-foreground/80">PPN</span>
         </label>

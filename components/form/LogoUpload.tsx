@@ -46,11 +46,11 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
               className="h-full w-full object-contain"
             />
           ) : (
-            <span className="text-xs text-foreground/40">Tanpa logo</span>
+            <span className="text-xs text-foreground/60">Tanpa logo</span>
           )}
         </div>
         <div className="flex flex-col gap-1">
-          <label className="cursor-pointer rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5">
+          <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5">
             {isProcessing
               ? "Memproses…"
               : logoBase64
@@ -68,7 +68,7 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
             <button
               type="button"
               onClick={() => onChange(undefined)}
-              className="text-xs text-red-600 hover:underline"
+              className="py-2 text-left text-xs text-red-600 hover:underline"
             >
               Hapus logo
             </button>

@@ -18,15 +18,15 @@ export function AppHeader() {
       <Link href="/" className="text-lg font-bold tracking-tight">
         KwitansiKlik
       </Link>
-      <nav className="flex items-center gap-4 text-sm">
+      <nav className="flex items-center gap-3 text-sm">
         {NAV_ITEMS.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className={
               pathname === item.href
-                ? "font-semibold"
-                : "text-foreground/60 hover:text-foreground"
+                ? "inline-flex h-11 items-center font-semibold"
+                : "inline-flex h-11 items-center text-foreground/60 hover:text-foreground"
             }
           >
             {item.label}

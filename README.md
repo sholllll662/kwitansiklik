@@ -2,27 +2,31 @@
 
 > Pembuat kwitansi digital **gratis & open source** — bikin kwitansi profesional dalam hitungan detik, **tanpa perlu daftar akun**.
 
-KwitansiKlik membantu UMKM, freelancer, dan siapa pun di Indonesia membuat kwitansi/bukti pembayaran yang rapi: masukkan item & harga → dapat PDF → selesai. Tanpa login, tanpa email, tanpa server — semua diproses **di browser kamu** (client-side), jadi datamu tidak ke mana-mana.
+KwitansiKlik membantu UMKM, freelancer, dan siapa pun di Indonesia membuat kwitansi/bukti pembayaran yang rapi: masukkan item & harga → dapat PDF → selesai. Tanpa login, tanpa email, tanpa server — semua diproses **di browser kamu** (client-side), jadi datamu tidak ke mana-mana. Bisa di-install ke layar utama dan **jalan penuh tanpa internet**.
 
-**Status:** 🚧 MVP dalam pengembangan — saat ini di **Fase 0 (setup & fondasi)**. Lihat [roadmap](#-roadmap).
+**Live demo:** [kwitansiklik.vercel.app](https://kwitansiklik.vercel.app)
+
+![Tampilan form KwitansiKlik di mobile](docs/screenshots/home.png)
 
 ## ✨ Kenapa KwitansiKlik
 
 - **Tanpa daftar akun** — buka, bikin, unduh. Nol friksi.
 - **Privasi maksimal** — arsitektur client-side; data kwitansi & profil disimpan lokal di perangkat (localStorage), tidak dikirim ke server.
-- **PDF profesional** — di-generate di browser dengan [`@react-pdf/renderer`](https://react-pdf.org/) (PDF vektor, tajam).
-- **Mobile-first & PWA** — installable dan bisa jalan offline.
+- **PDF profesional, 3 pilihan template** — Modern, Klasik (terbilang + tanda tangan), Minimalis — di-generate di browser dengan [`@react-pdf/renderer`](https://react-pdf.org/) (PDF vektor, tajam).
+- **Mobile-first & PWA** — installable ke home screen dan berfungsi **offline penuh**, termasuk membuat & mengunduh PDF.
 - **Open source (AGPL-3.0)** — transparan dan gratis selamanya untuk fitur inti.
 
 ## 🧱 Tech Stack
 
-| Layer             | Teknologi                                 |
-| ----------------- | ----------------------------------------- |
-| Framework         | Next.js (App Router) + React + TypeScript |
-| Styling           | Tailwind CSS                              |
-| PDF               | `@react-pdf/renderer` (client-side)       |
-| Persistensi (MVP) | `localStorage` (tanpa backend/DB)         |
-| Hosting           | Vercel                                    |
+| Layer             | Teknologi                                            |
+| ----------------- | ---------------------------------------------------- |
+| Framework         | Next.js (App Router, Turbopack) + React + TypeScript |
+| Styling           | Tailwind CSS                                         |
+| PDF               | `@react-pdf/renderer` (client-side)                  |
+| PWA / Offline     | `@serwist/turbopack` (service worker)                |
+| Persistensi (MVP) | `localStorage` (tanpa backend/DB)                    |
+| Test              | Vitest                                               |
+| Hosting           | Vercel                                               |
 
 Arsitektur lengkap & alasan keputusan ada di [`docs/ADR-KwitansiKlik.md`](docs/ADR-KwitansiKlik.md).
 
@@ -39,6 +43,15 @@ npm run dev
 ```
 
 Buka [http://localhost:3000](http://localhost:3000) di browser.
+
+### Analytics (opsional)
+
+Proyek ini mendukung [Plausible Analytics](https://plausible.io) (tanpa cookie, privasi-friendly) secara **opt-in**. Default-nya tidak mengirim apa pun. Untuk mengaktifkan, salin `.env.example` ke `.env.local` dan isi domain Plausible-mu:
+
+```bash
+cp .env.example .env.local
+# lalu isi NEXT_PUBLIC_PLAUSIBLE_DOMAIN=domainmu.com
+```
 
 ### Skrip yang tersedia
 
@@ -65,18 +78,14 @@ MVP dibangun bertahap (detail di [`docs/MVP-Build-Plan-KwitansiKlik.md`](docs/MV
 - [x] **Fase 4** — Profil & riwayat (localStorage)
 - [x] **Fase 5** — Tiga template + selector
 - [x] **Fase 6** — PWA (installable + offline)
-- [ ] **Fase 7** — Polish & launch
+- [x] **Fase 7** — Polish & launch
 
 Konteks produk & strategi: [`docs/PRD-KwitansiKlik.md`](docs/PRD-KwitansiKlik.md).
 
 ## 🤝 Kontribusi
 
-Kontribusi sangat diterima! Untuk sekarang: buka [issue](https://github.com/OWNER/kwitansiklik/issues) untuk bug/ide, atau ajukan pull request. Sebelum mengirim PR, pastikan `npm run lint`, `npm run typecheck`, dan `npm run build` lolos. (`CONTRIBUTING.md` lengkap menyusul di Fase 7.)
+Kontribusi sangat diterima — lihat [`CONTRIBUTING.md`](CONTRIBUTING.md) untuk cara setup, konvensi kode, dan checklist sebelum mengirim PR. Bug/ide silakan buka di [issues](https://github.com/sholllll662/kwitansiklik/issues).
 
 ## 📄 Lisensi
 
 Dilisensikan di bawah **GNU Affero General Public License v3.0 (AGPL-3.0)** — lihat [`LICENSE`](LICENSE). Singkatnya: bebas dipakai, dipelajari, dimodifikasi, dan didistribusikan, dengan syarat karya turunan (termasuk yang dijalankan sebagai layanan jaringan) tetap open source di bawah lisensi yang sama.
-
----
-
-<sub>📸 Screenshot & demo live menyusul setelah MVP siap.</sub>

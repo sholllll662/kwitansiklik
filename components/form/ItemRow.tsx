@@ -23,20 +23,20 @@ export function ItemRow({
 
   return (
     <div className="rounded-xl border border-foreground/10 p-3">
-      <div className="flex items-start gap-2">
+      <div className="flex items-center gap-2">
         <input
           type="text"
           value={item.name}
           onChange={(e) => onChange(item.id, { name: e.target.value })}
           placeholder={`Nama item ${index + 1}`}
           aria-label={`Nama item ${index + 1}`}
-          className="min-w-0 flex-1 border-b border-foreground/15 bg-transparent pb-1 text-sm outline-none focus:border-foreground/40"
+          className="min-w-0 flex-1 rounded border-b border-foreground/15 bg-transparent pb-1 text-sm outline-none focus:border-foreground/40 focus:ring-2 focus:ring-[#2563EB]/30"
         />
         <button
           type="button"
           onClick={() => onRemove(item.id)}
           aria-label={`Hapus item ${index + 1}`}
-          className="shrink-0 rounded-full p-1 text-foreground/40 hover:bg-foreground/5 hover:text-red-600"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-foreground/60 hover:bg-foreground/5 hover:text-red-600"
         >
           ✕
         </button>
@@ -59,7 +59,7 @@ export function ItemRow({
       </div>
 
       <div className="mt-2 flex items-center justify-between text-sm">
-        <span className="text-foreground/50">Subtotal item</span>
+        <span className="text-foreground/60">Subtotal item</span>
         <span className="font-medium">{formatRupiah(lineTotal)}</span>
       </div>
 

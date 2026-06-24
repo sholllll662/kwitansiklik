@@ -188,14 +188,14 @@ export function ReceiptForm() {
 
       <section className="flex items-center justify-between gap-3 rounded-xl border border-foreground/10 p-4">
         <div className="min-w-0">
-          <p className="text-xs text-foreground/50">Profil Penjual</p>
+          <p className="text-xs text-foreground/60">Profil Penjual</p>
           <p className="truncate text-sm font-medium">
             {profile.businessName || "Belum diisi"}
           </p>
         </div>
         <Link
           href="/profil"
-          className="shrink-0 rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+          className="inline-flex h-11 shrink-0 items-center rounded-full border border-foreground/15 px-4 text-sm font-medium hover:bg-foreground/5"
         >
           {profile.businessName ? "Ubah" : "Lengkapi profil"}
         </Link>
@@ -240,7 +240,7 @@ export function ReceiptForm() {
       <button
         type="button"
         onClick={() => setIsPreviewOpen((prev) => !prev)}
-        className="self-start rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+        className="inline-flex h-11 items-center self-start rounded-full border border-foreground/15 px-4 text-sm font-medium hover:bg-foreground/5"
       >
         {isPreviewOpen ? "Tutup Pratinjau" : "Lihat Pratinjau"}
       </button>
@@ -250,7 +250,7 @@ export function ReceiptForm() {
           <button
             type="button"
             onClick={() => setPreviewVersion((v) => v + 1)}
-            className="self-end text-xs text-foreground/50 underline hover:text-foreground"
+            className="self-end py-2 text-xs text-foreground/60 underline hover:text-foreground"
           >
             Perbarui pratinjau dengan data terbaru
           </button>

@@ -37,7 +37,7 @@ export function PdfPreview({ document }: PdfPreviewProps) {
   return (
     <div className="overflow-hidden rounded-xl border border-foreground/10">
       {loading || !url ? (
-        <div className="flex h-[500px] items-center justify-center text-sm text-foreground/40">
+        <div className="flex h-[500px] items-center justify-center text-sm text-foreground/60">
           Memuat pratinjau…
         </div>
       ) : (

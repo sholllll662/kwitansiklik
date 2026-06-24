@@ -44,7 +44,7 @@ export function InstallButton() {
     <button
       type="button"
       onClick={handleInstall}
-      className="rounded-full bg-foreground px-3 py-1 text-xs font-medium text-background hover:bg-[#383838] dark:hover:bg-[#ccc]"
+      className="inline-flex h-11 items-center rounded-full bg-foreground px-4 text-sm font-medium text-background hover:bg-[#383838] dark:hover:bg-[#ccc]"
     >
       Install
     </button>

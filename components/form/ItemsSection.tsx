@@ -54,7 +54,7 @@ export function ItemsSection({
       <button
         type="button"
         onClick={addItem}
-        className="self-start rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+        className="inline-flex h-11 items-center self-start rounded-full border border-foreground/15 px-4 text-sm font-medium hover:bg-foreground/5"
       >
         + Tambah Item
       </button>

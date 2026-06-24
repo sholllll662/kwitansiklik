@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { NumericTextField } from "@/components/form/NumericTextField";
+import { TEXT_INPUT_CLASS } from "@/components/form/styles";
 import { DEFAULT_SETTINGS, getSettings, saveSettings } from "@/lib/settings";
 import type { AppSettings } from "@/lib/types";
 
@@ -55,15 +56,15 @@ export default function PengaturanPage() {
             onChange={(e) =>
               setSettings((prev) => ({ ...prev, numberFormat: e.target.value }))
             }
-            className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+            className={TEXT_INPUT_CLASS}
           />
-          <span className="text-[11px] text-foreground/40">
+          <span className="text-[11px] text-foreground/60">
             Placeholder: {"{YYYY}"} {"{YY}"} {"{MM}"} {"{DD}"} dan {"{NNN}"}{" "}
             (jumlah N = lebar padding nol)
           </span>
         </label>
 
-        <p className="text-xs text-foreground/40">
+        <p className="text-xs text-foreground/60">
           Mata uang: IDR — dukungan multi-mata uang direncanakan di versi
           mendatang.
         </p>

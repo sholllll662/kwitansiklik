@@ -4,13 +4,13 @@
   "private": true,
   "description": "Pembuat kwitansi digital gratis & open source — tanpa perlu daftar akun, jalan di browser (client-side).",
   "license": "AGPL-3.0-or-later",
-  "homepage": "https://github.com/OWNER/kwitansiklik#readme",
+  "homepage": "https://github.com/sholllll662/kwitansiklik#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OWNER/kwitansiklik.git"
+    "url": "https://github.com/sholllll662/kwitansiklik.git"
   },
   "bugs": {
-    "url": "https://github.com/OWNER/kwitansiklik/issues"
+    "url": "https://github.com/sholllll662/kwitansiklik/issues"
   },
   "scripts": {
     "dev": "next dev",

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ModernTemplate } from "@/components/pdf/ModernTemplate";
 import { downloadPdfDocument } from "@/components/pdf/download";
+import { TEXT_INPUT_CLASS } from "@/components/form/styles";
 import { calculateTotal } from "@/lib/calc";
 import { formatDate, formatRupiah } from "@/lib/format";
 import { getProfile } from "@/lib/profile";
@@ -59,11 +60,11 @@ export default function RiwayatPage() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Cari nomor atau nama pembeli…"
-        className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+        className={TEXT_INPUT_CLASS}
       />
 
       {filtered.length === 0 ? (
-        <p className="py-8 text-center text-sm text-foreground/40">
+        <p className="py-8 text-center text-sm text-foreground/60">
           {receipts.length === 0
             ? "Belum ada riwayat kwitansi."
             : "Tidak ada kwitansi yang cocok."}
@@ -86,7 +87,7 @@ export default function RiwayatPage() {
                   <p className="truncate text-sm font-medium">
                     {receipt.number}
                   </p>
-                  <p className="truncate text-xs text-foreground/50">
+                  <p className="truncate text-xs text-foreground/60">
                     {formatDate(receipt.date)}
                     {receipt.buyerName ? ` · ${receipt.buyerName}` : ""}
                   </p>
@@ -97,14 +98,14 @@ export default function RiwayatPage() {
                     type="button"
                     onClick={() => handleRedownload(receipt)}
                     disabled={downloadingId === receipt.id}
-                    className="rounded-full border border-foreground/15 px-3 py-1.5 text-xs font-medium hover:bg-foreground/5 disabled:opacity-50"
+                    className="inline-flex h-11 items-center rounded-full border border-foreground/15 px-3 text-xs font-medium hover:bg-foreground/5 disabled:opacity-50"
                   >
                     {downloadingId === receipt.id ? "…" : "Unduh"}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(receipt.id)}
-                    className="rounded-full border border-foreground/15 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50"
+                    className="inline-flex h-11 items-center rounded-full border border-foreground/15 px-3 text-xs font-medium text-red-600 hover:bg-red-50"
                   >
                     Hapus
                   </button>

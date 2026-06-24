@@ -1,5 +1,7 @@
 "use client";
 
+import { TEXT_INPUT_CLASS } from "@/components/form/styles";
+
 interface ReceiptMetaFieldsProps {
   number: string;
   date: string;
@@ -34,9 +36,9 @@ export function ReceiptMetaFields({
             type="text"
             value={number}
             onChange={(e) => onNumberChange(e.target.value)}
-            className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+            className={TEXT_INPUT_CLASS}
           />
-          <span className="text-[11px] text-foreground/40">
+          <span className="text-[11px] text-foreground/60">
             Format: {numberFormat} (ubah di Pengaturan)
           </span>
         </label>
@@ -49,7 +51,7 @@ export function ReceiptMetaFields({
             type="date"
             value={date}
             onChange={(e) => onDateChange(e.target.value)}
-            className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+            className={TEXT_INPUT_CLASS}
           />
         </label>
       </div>
@@ -62,7 +64,7 @@ export function ReceiptMetaFields({
           type="text"
           value={buyerName}
           onChange={(e) => onBuyerNameChange(e.target.value)}
-          className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+          className={TEXT_INPUT_CLASS}
         />
       </label>
     </section>

@@ -25,9 +25,9 @@ export function NumericTextField({
       {label ? (
         <span className="text-xs font-medium text-foreground/70">{label}</span>
       ) : null}
-      <div className="flex items-center gap-1 rounded-lg border border-foreground/15 px-3 py-2 focus-within:border-foreground/40">
+      <div className="flex items-center gap-1 rounded-lg border border-foreground/15 px-3 py-2 focus-within:border-foreground/40 focus-within:ring-2 focus-within:ring-[#2563EB]/30">
         {prefix ? (
-          <span className="text-sm text-foreground/50">{prefix}</span>
+          <span className="text-sm text-foreground/60">{prefix}</span>
         ) : null}
         <input
           type="text"

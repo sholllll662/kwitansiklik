@@ -1,5 +1,6 @@
 "use client";
 
+import { TEXT_INPUT_CLASS } from "@/components/form/styles";
 import type { SellerProfile } from "@/lib/types";
 
 interface ProfileFieldsProps {
@@ -28,7 +29,7 @@ export function ProfileFields({
           value={profile.businessName}
           onChange={(e) => onChange({ businessName: e.target.value })}
           placeholder="mis. Toko Maju Bersama"
-          className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+          className={TEXT_INPUT_CLASS}
         />
       </label>
       {error ? <p className="text-xs text-red-600">{error}</p> : null}
@@ -42,7 +43,7 @@ export function ProfileFields({
             type="text"
             value={profile.ownerName ?? ""}
             onChange={(e) => onChange({ ownerName: e.target.value })}
-            className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+            className={TEXT_INPUT_CLASS}
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -53,7 +54,7 @@ export function ProfileFields({
             type="text"
             value={profile.phone ?? ""}
             onChange={(e) => onChange({ phone: e.target.value })}
-            className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+            className={TEXT_INPUT_CLASS}
           />
         </label>
       </div>
@@ -64,7 +65,7 @@ export function ProfileFields({
           type="text"
           value={profile.address ?? ""}
           onChange={(e) => onChange({ address: e.target.value })}
-          className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
+          className={TEXT_INPUT_CLASS}
         />
       </label>
     </section>
