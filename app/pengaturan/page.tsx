@@ -21,6 +21,7 @@ export default function PengaturanPage() {
 
   function handleSave() {
     const next: AppSettings = {
+      ...settings,
       defaultTaxPercent: Number(taxPercentInput || 0),
       numberFormat: settings.numberFormat,
     };

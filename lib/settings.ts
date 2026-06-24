@@ -7,10 +7,13 @@ const SETTINGS_KEY = "settings";
 export const DEFAULT_SETTINGS: AppSettings = {
   defaultTaxPercent: 11,
   numberFormat: DEFAULT_NUMBER_FORMAT,
+  template: "modern",
 };
 
+/** Digabung dengan default — settings lama yang tersimpan tanpa field baru tetap valid. */
 export function getSettings(): AppSettings {
-  return getItem<AppSettings>(SETTINGS_KEY) ?? DEFAULT_SETTINGS;
+  const stored = getItem<Partial<AppSettings>>(SETTINGS_KEY);
+  return { ...DEFAULT_SETTINGS, ...stored };
 }
 
 export function saveSettings(settings: AppSettings): void {

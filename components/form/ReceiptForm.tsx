@@ -1,18 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { DiscountTaxFields } from "@/components/form/DiscountTaxFields";
 import { ItemsSection } from "@/components/form/ItemsSection";
 import { ReceiptMetaFields } from "@/components/form/ReceiptMetaFields";
 import { SummaryCard } from "@/components/form/SummaryCard";
+import { TemplateSelector } from "@/components/form/TemplateSelector";
 import {
   createEmptyItemDraft,
   type DiscountType,
   type ItemDraft,
 } from "@/components/form/types";
 import { downloadPdfDocument } from "@/components/pdf/download";
-import { ModernTemplate } from "@/components/pdf/ModernTemplate";
+import { PdfPreview } from "@/components/pdf/PdfPreview";
+import { TEMPLATE_COMPONENTS } from "@/components/pdf/templates";
 import { calculateTotal } from "@/lib/calc";
 import { todayIsoDate } from "@/lib/format";
 import { getProfile } from "@/lib/profile";
@@ -22,11 +24,12 @@ import {
   incrementCounter,
 } from "@/lib/receipt-number";
 import { saveReceipt } from "@/lib/receipts";
-import { DEFAULT_SETTINGS, getSettings } from "@/lib/settings";
+import { DEFAULT_SETTINGS, getSettings, saveSettings } from "@/lib/settings";
 import type {
   AppSettings,
   Receipt,
   ReceiptItem,
+  ReceiptTemplateId,
   SellerProfile,
 } from "@/lib/types";
 
@@ -56,6 +59,8 @@ export function ReceiptForm() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [downloadError, setDownloadError] = useState<string>();
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewVersion, setPreviewVersion] = useState(0);
 
   // Nilai-nilai ini bergantung pada localStorage/jam perangkat — beda antara
   // render server & client, jadi sengaja ditunda ke effect (bukan lazy
@@ -109,13 +114,7 @@ export function ReceiptForm() {
     !itemsGeneralError &&
     Object.keys(itemErrors).length === 0;
 
-  async function handleDownload() {
-    setDownloadSuccess(false);
-    setDownloadError(undefined);
-    setHasAttemptedSubmit(true);
-
-    if (!isValid) return;
-
+  function buildReceiptDraft(): Receipt {
     const receiptItems: ReceiptItem[] = items.map((item) => ({
       id: item.id,
       name: item.name.trim(),
@@ -123,7 +122,7 @@ export function ReceiptForm() {
       unitPrice: Number(item.unitPrice || 0),
     }));
 
-    const receipt: Receipt = {
+    return {
       id: crypto.randomUUID(),
       number: number || peekNextNumber(settings.numberFormat),
       date: date || todayIsoDate(),
@@ -136,11 +135,38 @@ export function ReceiptForm() {
       taxPercent: taxEnabled ? Number(taxPercent || 0) : undefined,
       createdAt: new Date().toISOString(),
     };
+  }
+
+  function handleTemplateChange(id: ReceiptTemplateId) {
+    const next = { ...settings, template: id };
+    setSettings(next);
+    saveSettings(next);
+  }
+
+  // Sengaja TIDAK depend pada setiap field form (item/profil/dll) — pratinjau
+  // hanya regenerasi saat ganti template, buka/tutup, atau klik "Perbarui"
+  // secara eksplisit. Regenerasi PDF di setiap keystroke terlalu berat untuk
+  // HP kelas menengah.
+  const previewDocument = useMemo(() => {
+    const Template = TEMPLATE_COMPONENTS[settings.template];
+    return <Template profile={profile} receipt={buildReceiptDraft()} />;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.template, isPreviewOpen, previewVersion]);
+
+  async function handleDownload() {
+    setDownloadSuccess(false);
+    setDownloadError(undefined);
+    setHasAttemptedSubmit(true);
+
+    if (!isValid) return;
+
+    const receipt = buildReceiptDraft();
+    const Template = TEMPLATE_COMPONENTS[settings.template];
 
     setIsGenerating(true);
     try {
       await downloadPdfDocument(
-        <ModernTemplate profile={profile} receipt={receipt} />,
+        <Template profile={profile} receipt={receipt} />,
         `kwitansi-${sanitizeFilename(receipt.number)}.pdf`,
       );
       incrementCounter();
@@ -205,6 +231,32 @@ export function ReceiptForm() {
         onTaxEnabledChange={setTaxEnabled}
         onTaxPercentChange={setTaxPercent}
       />
+
+      <TemplateSelector
+        value={settings.template}
+        onChange={handleTemplateChange}
+      />
+
+      <button
+        type="button"
+        onClick={() => setIsPreviewOpen((prev) => !prev)}
+        className="self-start rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+      >
+        {isPreviewOpen ? "Tutup Pratinjau" : "Lihat Pratinjau"}
+      </button>
+
+      {isPreviewOpen ? (
+        <div className="flex flex-col gap-2">
+          <button
+            type="button"
+            onClick={() => setPreviewVersion((v) => v + 1)}
+            className="self-end text-xs text-foreground/50 underline hover:text-foreground"
+          >
+            Perbarui pratinjau dengan data terbaru
+          </button>
+          <PdfPreview document={previewDocument} />
+        </div>
+      ) : null}
 
       <SummaryCard totals={totals} />
 

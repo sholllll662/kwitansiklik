@@ -8,8 +8,8 @@ import {
 } from "@react-pdf/renderer";
 import { calculateTotal } from "@/lib/calc";
 import { formatDate, formatRupiah } from "@/lib/format";
-import type { Receipt, SellerProfile } from "@/lib/types";
 import { PDF_FONT_FAMILY, registerPdfFonts } from "@/components/pdf/fonts";
+import type { ReceiptTemplateProps } from "@/components/pdf/types";
 
 registerPdfFonts();
 
@@ -170,12 +170,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export interface ModernTemplateProps {
-  profile: SellerProfile;
-  receipt: Receipt;
-}
-
-export function ModernTemplate({ profile, receipt }: ModernTemplateProps) {
+export function ModernTemplate({ profile, receipt }: ReceiptTemplateProps) {
   const totals = calculateTotal({
     items: receipt.items,
     discount: receipt.discount,

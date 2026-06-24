@@ -35,9 +35,13 @@ export interface Receipt {
   createdAt: string;
 }
 
+export type ReceiptTemplateId = "modern" | "klasik" | "minimalis";
+
 export interface AppSettings {
   /** PPN default (%) saat membuat kwitansi baru, mis. 11. */
   defaultTaxPercent: number;
   /** Template format nomor kwitansi, mis. "INV/{YYYY}/{NNN}". */
   numberFormat: string;
+  /** Template kwitansi pilihan terakhir. */
+  template: ReceiptTemplateId;
 }
