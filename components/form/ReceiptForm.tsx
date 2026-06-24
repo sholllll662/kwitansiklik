@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { DiscountTaxFields } from "@/components/form/DiscountTaxFields";
 import { ItemsSection } from "@/components/form/ItemsSection";
-import { ProfileFields } from "@/components/form/ProfileFields";
 import { ReceiptMetaFields } from "@/components/form/ReceiptMetaFields";
 import { SummaryCard } from "@/components/form/SummaryCard";
 import {
@@ -15,20 +15,23 @@ import { downloadPdfDocument } from "@/components/pdf/download";
 import { ModernTemplate } from "@/components/pdf/ModernTemplate";
 import { calculateTotal } from "@/lib/calc";
 import { todayIsoDate } from "@/lib/format";
+import { getProfile } from "@/lib/profile";
 import {
-  DEFAULT_NUMBER_FORMAT,
   formatReceiptNumber,
   getCurrentCounter,
   incrementCounter,
 } from "@/lib/receipt-number";
-import type { Receipt, ReceiptItem, SellerProfile } from "@/lib/types";
+import { saveReceipt } from "@/lib/receipts";
+import { DEFAULT_SETTINGS, getSettings } from "@/lib/settings";
+import type {
+  AppSettings,
+  Receipt,
+  ReceiptItem,
+  SellerProfile,
+} from "@/lib/types";
 
-function peekNextNumber(): string {
-  return formatReceiptNumber(
-    DEFAULT_NUMBER_FORMAT,
-    new Date(),
-    getCurrentCounter() + 1,
-  );
+function peekNextNumber(format: string): string {
+  return formatReceiptNumber(format, new Date(), getCurrentCounter() + 1);
 }
 
 function sanitizeFilename(value: string): string {
@@ -37,6 +40,7 @@ function sanitizeFilename(value: string): string {
 
 export function ReceiptForm() {
   const [profile, setProfile] = useState<SellerProfile>({ businessName: "" });
+  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
   const [items, setItems] = useState<ItemDraft[]>([createEmptyItemDraft()]);
   const [number, setNumber] = useState("");
   const [date, setDate] = useState("");
@@ -44,7 +48,9 @@ export function ReceiptForm() {
   const [discountType, setDiscountType] = useState<DiscountType>("none");
   const [discountValue, setDiscountValue] = useState("");
   const [taxEnabled, setTaxEnabled] = useState(true);
-  const [taxPercent, setTaxPercent] = useState("11");
+  const [taxPercent, setTaxPercent] = useState(
+    String(DEFAULT_SETTINGS.defaultTaxPercent),
+  );
 
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -56,8 +62,13 @@ export function ReceiptForm() {
   // initializer) supaya tidak terjadi hydration mismatch.
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    setNumber(peekNextNumber());
+    const loadedSettings = getSettings();
+    const loadedProfile = getProfile();
+    setSettings(loadedSettings);
+    setNumber(peekNextNumber(loadedSettings.numberFormat));
     setDate(todayIsoDate());
+    setTaxPercent(String(loadedSettings.defaultTaxPercent));
+    if (loadedProfile) setProfile(loadedProfile);
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -90,7 +101,7 @@ export function ReceiptForm() {
   }
   const businessNameError = profile.businessName.trim()
     ? undefined
-    : "Nama bisnis wajib diisi";
+    : "Lengkapi profil penjual (nama bisnis) dulu";
   const itemsGeneralError =
     items.length === 0 ? "Tambahkan minimal 1 item" : undefined;
   const isValid =
@@ -114,7 +125,7 @@ export function ReceiptForm() {
 
     const receipt: Receipt = {
       id: crypto.randomUUID(),
-      number: number || peekNextNumber(),
+      number: number || peekNextNumber(settings.numberFormat),
       date: date || todayIsoDate(),
       buyerName: buyerName.trim() || undefined,
       items: receiptItems,
@@ -133,7 +144,8 @@ export function ReceiptForm() {
         `kwitansi-${sanitizeFilename(receipt.number)}.pdf`,
       );
       incrementCounter();
-      setNumber(peekNextNumber());
+      saveReceipt(receipt);
+      setNumber(peekNextNumber(settings.numberFormat));
       setDownloadSuccess(true);
     } catch {
       setDownloadError("Gagal membuat PDF. Coba lagi.");
@@ -144,23 +156,33 @@ export function ReceiptForm() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
-      <header className="mb-2">
-        <h1 className="text-2xl font-bold tracking-tight">KwitansiKlik</h1>
-        <p className="text-sm text-foreground/60">
-          Tanpa akun. Data tidak dikirim ke server.
-        </p>
-      </header>
+      <p className="text-sm text-foreground/60">
+        Tanpa akun. Data tidak dikirim ke server.
+      </p>
 
-      <ProfileFields
-        profile={profile}
-        error={hasAttemptedSubmit ? businessNameError : undefined}
-        onChange={(patch) => setProfile((prev) => ({ ...prev, ...patch }))}
-      />
+      <section className="flex items-center justify-between gap-3 rounded-xl border border-foreground/10 p-4">
+        <div className="min-w-0">
+          <p className="text-xs text-foreground/50">Profil Penjual</p>
+          <p className="truncate text-sm font-medium">
+            {profile.businessName || "Belum diisi"}
+          </p>
+        </div>
+        <Link
+          href="/profil"
+          className="shrink-0 rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+        >
+          {profile.businessName ? "Ubah" : "Lengkapi profil"}
+        </Link>
+      </section>
+      {hasAttemptedSubmit && businessNameError ? (
+        <p className="text-xs text-red-600">{businessNameError}</p>
+      ) : null}
 
       <ReceiptMetaFields
         number={number}
         date={date}
         buyerName={buyerName}
+        numberFormat={settings.numberFormat}
         onNumberChange={setNumber}
         onDateChange={setDate}
         onBuyerNameChange={setBuyerName}

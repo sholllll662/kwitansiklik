@@ -1,11 +1,10 @@
 "use client";
 
-import { DEFAULT_NUMBER_FORMAT } from "@/lib/receipt-number";
-
 interface ReceiptMetaFieldsProps {
   number: string;
   date: string;
   buyerName: string;
+  numberFormat: string;
   onNumberChange: (value: string) => void;
   onDateChange: (value: string) => void;
   onBuyerNameChange: (value: string) => void;
@@ -15,6 +14,7 @@ export function ReceiptMetaFields({
   number,
   date,
   buyerName,
+  numberFormat,
   onNumberChange,
   onDateChange,
   onBuyerNameChange,
@@ -37,7 +37,7 @@ export function ReceiptMetaFields({
             className="rounded-lg border border-foreground/15 px-3 py-2 text-sm outline-none focus:border-foreground/40"
           />
           <span className="text-[11px] text-foreground/40">
-            Format: {DEFAULT_NUMBER_FORMAT}
+            Format: {numberFormat} (ubah di Pengaturan)
           </span>
         </label>
 

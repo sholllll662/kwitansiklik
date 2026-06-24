@@ -34,3 +34,10 @@ export interface Receipt {
   /** ISO timestamp saat kwitansi dibuat. */
   createdAt: string;
 }
+
+export interface AppSettings {
+  /** PPN default (%) saat membuat kwitansi baru, mis. 11. */
+  defaultTaxPercent: number;
+  /** Template format nomor kwitansi, mis. "INV/{YYYY}/{NNN}". */
+  numberFormat: string;
+}
