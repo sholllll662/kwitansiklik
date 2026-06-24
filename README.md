@@ -51,13 +51,15 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 | `npm run typecheck`    | Cek tipe TypeScript (`tsc --noEmit`) |
 | `npm run format`       | Format kode dengan Prettier          |
 | `npm run format:check` | Cek format tanpa mengubah file       |
+| `npm run test`         | Jalankan unit test (Vitest)          |
+| `npm run test:watch`   | Unit test mode watch                 |
 
 ## 🗺️ Roadmap
 
 MVP dibangun bertahap (detail di [`docs/MVP-Build-Plan-KwitansiKlik.md`](docs/MVP-Build-Plan-KwitansiKlik.md)):
 
 - [x] **Fase 0** — Setup & fondasi
-- [ ] **Fase 1** — Data layer & logika inti (kalkulasi, nomor kwitansi, terbilang)
+- [x] **Fase 1** — Data layer & logika inti (kalkulasi, nomor kwitansi, terbilang)
 - [ ] **Fase 2** — PDF spike (`@react-pdf/renderer`)
 - [ ] **Fase 3** — Form input UI (mobile-first)
 - [ ] **Fase 4** — Profil & riwayat (localStorage)
