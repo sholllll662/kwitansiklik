@@ -1,0 +1,35 @@
+"use client";
+
+import type { CalcResult } from "@/lib/calc";
+import { formatRupiah } from "@/lib/format";
+
+interface SummaryCardProps {
+  totals: CalcResult;
+}
+
+export function SummaryCard({ totals }: SummaryCardProps) {
+  return (
+    <section className="flex flex-col gap-1.5 rounded-xl border border-foreground/10 p-4">
+      <div className="flex justify-between text-sm text-foreground/60">
+        <span>Subtotal</span>
+        <span>{formatRupiah(totals.subtotal)}</span>
+      </div>
+      {totals.discountAmount > 0 ? (
+        <div className="flex justify-between text-sm text-foreground/60">
+          <span>Diskon</span>
+          <span>-{formatRupiah(totals.discountAmount)}</span>
+        </div>
+      ) : null}
+      {totals.taxAmount > 0 ? (
+        <div className="flex justify-between text-sm text-foreground/60">
+          <span>PPN</span>
+          <span>{formatRupiah(totals.taxAmount)}</span>
+        </div>
+      ) : null}
+      <div className="mt-2 flex justify-between border-t border-foreground/10 pt-2 text-base font-semibold">
+        <span>Total</span>
+        <span>{formatRupiah(totals.total)}</span>
+      </div>
+    </section>
+  );
+}

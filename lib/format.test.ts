@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDate, formatRupiah } from "@/lib/format";
+import { formatDate, formatRupiah, todayIsoDate } from "@/lib/format";
 
 describe("formatRupiah", () => {
   it("memformat dengan prefiks 'Rp ' dan titik sebagai pemisah ribuan", () => {
@@ -21,5 +21,13 @@ describe("formatDate", () => {
 
   it("memformat objek Date", () => {
     expect(formatDate(new Date(2026, 11, 31))).toBe("31 Desember 2026");
+  });
+});
+
+describe("todayIsoDate", () => {
+  it("mengembalikan format YYYY-MM-DD yang cocok dengan tanggal lokal saat ini", () => {
+    const d = new Date();
+    const expected = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    expect(todayIsoDate()).toBe(expected);
   });
 });

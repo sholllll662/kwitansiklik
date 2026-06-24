@@ -61,7 +61,7 @@ MVP dibangun bertahap (detail di [`docs/MVP-Build-Plan-KwitansiKlik.md`](docs/MV
 - [x] **Fase 0** — Setup & fondasi
 - [x] **Fase 1** — Data layer & logika inti (kalkulasi, nomor kwitansi, terbilang)
 - [x] **Fase 2** — PDF spike (`@react-pdf/renderer`)
-- [ ] **Fase 3** — Form input UI (mobile-first)
+- [x] **Fase 3** — Form input UI (mobile-first)
 - [ ] **Fase 4** — Profil & riwayat (localStorage)
 - [ ] **Fase 5** — Tiga template + selector
 - [ ] **Fase 6** — PWA (installable + offline)
