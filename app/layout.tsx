@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import { SerwistProvider } from "@serwist/turbopack/react";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppHeader } from "@/components/ui/AppHeader";
 import "./globals.css";
@@ -13,10 +14,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const APP_NAME = "KwitansiKlik";
+
 export const metadata: Metadata = {
-  title: "KwitansiKlik — Buat kwitansi tanpa daftar akun",
+  applicationName: APP_NAME,
+  title: {
+    default: "KwitansiKlik — Buat kwitansi tanpa daftar akun",
+    template: "%s — KwitansiKlik",
+  },
   description:
     "Buat kwitansi profesional dalam hitungan detik, gratis & tanpa perlu daftar akun. Jalan di browser, data tersimpan lokal di perangkatmu.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_NAME,
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2563EB",
 };
 
 export default function RootLayout({
@@ -30,8 +50,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <AppHeader />
-        {children}
+        <SerwistProvider swUrl="/serwist/sw.js">
+          <AppHeader />
+          {children}
+        </SerwistProvider>
       </body>
     </html>
   );

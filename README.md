@@ -64,7 +64,7 @@ MVP dibangun bertahap (detail di [`docs/MVP-Build-Plan-KwitansiKlik.md`](docs/MV
 - [x] **Fase 3** — Form input UI (mobile-first)
 - [x] **Fase 4** — Profil & riwayat (localStorage)
 - [x] **Fase 5** — Tiga template + selector
-- [ ] **Fase 6** — PWA (installable + offline)
+- [x] **Fase 6** — PWA (installable + offline)
 - [ ] **Fase 7** — Polish & launch
 
 Konteks produk & strategi: [`docs/PRD-KwitansiKlik.md`](docs/PRD-KwitansiKlik.md).

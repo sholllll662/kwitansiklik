@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { InstallButton } from "@/components/ui/InstallButton";
 
 const NAV_ITEMS = [
   { href: "/", label: "Beranda" },
@@ -17,7 +18,7 @@ export function AppHeader() {
       <Link href="/" className="text-lg font-bold tracking-tight">
         KwitansiKlik
       </Link>
-      <nav className="flex gap-4 text-sm">
+      <nav className="flex items-center gap-4 text-sm">
         {NAV_ITEMS.map((item) => (
           <Link
             key={item.href}
@@ -31,6 +32,7 @@ export function AppHeader() {
             {item.label}
           </Link>
         ))}
+        <InstallButton />
       </nav>
     </header>
   );

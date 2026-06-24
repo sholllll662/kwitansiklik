@@ -25,9 +25,11 @@
   },
   "dependencies": {
     "@react-pdf/renderer": "4.5.1",
+    "@serwist/turbopack": "^9.5.11",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "serwist": "^9.5.11"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -35,6 +37,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitest/ui": "4.1.9",
+    "esbuild": "^0.28.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "eslint-config-prettier": "10.1.8",
