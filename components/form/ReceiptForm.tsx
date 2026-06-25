@@ -15,6 +15,7 @@ import {
 import { downloadPdfDocument } from "@/components/pdf/download";
 import { PdfPreview } from "@/components/pdf/PdfPreview";
 import { TEMPLATE_COMPONENTS } from "@/components/pdf/templates";
+import { trackEvent } from "@/lib/analytics";
 import { calculateTotal } from "@/lib/calc";
 import { todayIsoDate } from "@/lib/format";
 import { getProfile } from "@/lib/profile";
@@ -171,6 +172,7 @@ export function ReceiptForm() {
       );
       incrementCounter();
       saveReceipt(receipt);
+      trackEvent("Kwitansi Diunduh", { template: settings.template });
       setNumber(peekNextNumber(settings.numberFormat));
       setDownloadSuccess(true);
     } catch {

@@ -1,3 +1,4 @@
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { SerwistProvider } from "@serwist/turbopack/react";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -52,6 +53,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <Analytics />
+        <VercelAnalytics />
         <SerwistProvider swUrl="/serwist/sw.js">
           <AppHeader />
           {children}

@@ -46,12 +46,17 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 
 ### Analytics (opsional)
 
-Proyek ini mendukung [Plausible Analytics](https://plausible.io) (tanpa cookie, privasi-friendly) secara **opt-in**. Default-nya tidak mengirim apa pun. Untuk mengaktifkan, salin `.env.example` ke `.env.local` dan isi domain Plausible-mu:
+Proyek ini mendukung dua jalur analytics, keduanya privasi-friendly (tanpa cookie):
+
+1. **Vercel Web Analytics** — pageview & visitor dasar, sudah terpasang di kode (`@vercel/analytics`). Aktifkan dengan klik **Enable** di tab **Analytics** pada dashboard proyek Vercel-mu (tidak ada langkah kode tambahan; tidak tersedia lewat API publik Vercel, jadi memang harus manual di dashboard).
+2. **Plausible Analytics** — untuk custom event "Kwitansi Diunduh" (metrik activation rate yang sesungguhnya, bukan cuma traffic). Opt-in lewat env var, default-nya tidak mengirim apa pun. Untuk mengaktifkan:
 
 ```bash
 cp .env.example .env.local
 # lalu isi NEXT_PUBLIC_PLAUSIBLE_DOMAIN=domainmu.com
 ```
+
+(butuh akun [Plausible](https://plausible.io) terpisah & domain terdaftar di sana).
 
 ### Skrip yang tersedia
 
