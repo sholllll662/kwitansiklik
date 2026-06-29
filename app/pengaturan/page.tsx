@@ -32,13 +32,13 @@ export default function PengaturanPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-4 py-8">
       <p className="text-sm text-muted-foreground">
         Pengaturan ini dipakai sebagai default saat membuat kwitansi baru.
         Disimpan lokal di perangkat ini.
       </p>
 
-      <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4">
+      <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 lg:max-w-md">
         <NumericTextField
           label="PPN default (%)"
           value={taxPercentInput}
@@ -73,7 +73,7 @@ export default function PengaturanPage() {
       <button
         type="button"
         onClick={handleSave}
-        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 lg:w-auto lg:self-start lg:px-8"
       >
         Simpan Pengaturan
       </button>

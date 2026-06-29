@@ -14,7 +14,7 @@ export function AppHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 pt-6">
+    <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-6">
       <Link href="/" className="text-lg font-bold tracking-tight text-primary">
         KwitansiKlik
       </Link>

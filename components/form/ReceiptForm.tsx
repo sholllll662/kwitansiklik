@@ -183,102 +183,110 @@ export function ReceiptForm() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-8">
       <p className="text-sm text-muted-foreground">
         Tanpa akun. Data tidak dikirim ke server.
       </p>
 
-      <section className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
-        <div className="min-w-0">
-          <p className="text-xs text-muted-foreground">Profil Penjual</p>
-          <p className="truncate text-sm font-medium">
-            {profile.businessName || "Belum diisi"}
-          </p>
-        </div>
-        <Link
-          href="/profil"
-          className="inline-flex h-11 shrink-0 items-center rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
-        >
-          {profile.businessName ? "Ubah" : "Lengkapi profil"}
-        </Link>
-      </section>
-      {hasAttemptedSubmit && businessNameError ? (
-        <p className="text-xs text-destructive">{businessNameError}</p>
-      ) : null}
+      <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px] lg:items-start">
+        <div className="flex flex-col gap-4">
+          <section className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground">Profil Penjual</p>
+              <p className="truncate text-sm font-medium">
+                {profile.businessName || "Belum diisi"}
+              </p>
+            </div>
+            <Link
+              href="/profil"
+              className="inline-flex h-11 shrink-0 items-center rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
+            >
+              {profile.businessName ? "Ubah" : "Lengkapi profil"}
+            </Link>
+          </section>
+          {hasAttemptedSubmit && businessNameError ? (
+            <p className="text-xs text-destructive">{businessNameError}</p>
+          ) : null}
 
-      <ReceiptMetaFields
-        number={number}
-        date={date}
-        buyerName={buyerName}
-        numberFormat={settings.numberFormat}
-        onNumberChange={setNumber}
-        onDateChange={setDate}
-        onBuyerNameChange={setBuyerName}
-      />
+          <ReceiptMetaFields
+            number={number}
+            date={date}
+            buyerName={buyerName}
+            numberFormat={settings.numberFormat}
+            onNumberChange={setNumber}
+            onDateChange={setDate}
+            onBuyerNameChange={setBuyerName}
+          />
 
-      <ItemsSection
-        items={items}
-        errors={hasAttemptedSubmit ? itemErrors : {}}
-        generalError={hasAttemptedSubmit ? itemsGeneralError : undefined}
-        onChange={setItems}
-      />
+          <ItemsSection
+            items={items}
+            errors={hasAttemptedSubmit ? itemErrors : {}}
+            generalError={hasAttemptedSubmit ? itemsGeneralError : undefined}
+            onChange={setItems}
+          />
 
-      <DiscountTaxFields
-        discountType={discountType}
-        discountValue={discountValue}
-        taxEnabled={taxEnabled}
-        taxPercent={taxPercent}
-        onDiscountTypeChange={setDiscountType}
-        onDiscountValueChange={setDiscountValue}
-        onTaxEnabledChange={setTaxEnabled}
-        onTaxPercentChange={setTaxPercent}
-      />
+          <DiscountTaxFields
+            discountType={discountType}
+            discountValue={discountValue}
+            taxEnabled={taxEnabled}
+            taxPercent={taxPercent}
+            onDiscountTypeChange={setDiscountType}
+            onDiscountValueChange={setDiscountValue}
+            onTaxEnabledChange={setTaxEnabled}
+            onTaxPercentChange={setTaxPercent}
+          />
 
-      <TemplateSelector
-        value={settings.template}
-        onChange={handleTemplateChange}
-      />
+          <TemplateSelector
+            value={settings.template}
+            onChange={handleTemplateChange}
+          />
 
-      <button
-        type="button"
-        onClick={() => setIsPreviewOpen((prev) => !prev)}
-        className="inline-flex h-11 items-center self-start rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
-      >
-        {isPreviewOpen ? "Tutup Pratinjau" : "Lihat Pratinjau"}
-      </button>
-
-      {isPreviewOpen ? (
-        <div className="flex flex-col gap-2">
           <button
             type="button"
-            onClick={() => setPreviewVersion((v) => v + 1)}
-            className="self-end py-2 text-xs text-muted-foreground underline hover:text-foreground"
+            onClick={() => setIsPreviewOpen((prev) => !prev)}
+            className="inline-flex h-11 items-center self-start rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
           >
-            Perbarui pratinjau dengan data terbaru
+            {isPreviewOpen ? "Tutup Pratinjau" : "Lihat Pratinjau"}
           </button>
-          <PdfPreview document={previewDocument} />
+
+          {isPreviewOpen ? (
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => setPreviewVersion((v) => v + 1)}
+                className="self-end py-2 text-xs text-muted-foreground underline hover:text-foreground"
+              >
+                Perbarui pratinjau dengan data terbaru
+              </button>
+              <PdfPreview document={previewDocument} />
+            </div>
+          ) : null}
         </div>
-      ) : null}
 
-      <SummaryCard totals={totals} />
+        <div className="flex flex-col gap-4 lg:sticky lg:top-6">
+          <SummaryCard totals={totals} />
 
-      <button
-        type="button"
-        onClick={handleDownload}
-        disabled={isGenerating}
-        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
-      >
-        {isGenerating ? "Menyiapkan PDF…" : "Unduh PDF"}
-      </button>
+          <button
+            type="button"
+            onClick={handleDownload}
+            disabled={isGenerating}
+            className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+          >
+            {isGenerating ? "Menyiapkan PDF…" : "Unduh PDF"}
+          </button>
 
-      {downloadSuccess ? (
-        <p className="text-center text-sm text-success">
-          Kwitansi berhasil diunduh.
-        </p>
-      ) : null}
-      {downloadError ? (
-        <p className="text-center text-sm text-destructive">{downloadError}</p>
-      ) : null}
+          {downloadSuccess ? (
+            <p className="text-center text-sm text-success">
+              Kwitansi berhasil diunduh.
+            </p>
+          ) : null}
+          {downloadError ? (
+            <p className="text-center text-sm text-destructive">
+              {downloadError}
+            </p>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }

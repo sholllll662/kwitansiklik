@@ -50,7 +50,7 @@ export default function RiwayatPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 px-4 py-8">
       <p className="text-sm text-muted-foreground">
         Riwayat tersimpan lokal di perangkat ini, satu daftar per browser.
       </p>
@@ -60,7 +60,7 @@ export default function RiwayatPage() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Cari nomor atau nama pembeli…"
-        className={TEXT_INPUT_CLASS}
+        className={`${TEXT_INPUT_CLASS} lg:max-w-md`}
       />
 
       {filtered.length === 0 ? (
@@ -70,7 +70,7 @@ export default function RiwayatPage() {
             : "Tidak ada kwitansi yang cocok."}
         </p>
       ) : (
-        <div className="flex flex-col gap-2">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           {filtered.map((receipt) => {
             const total = calculateTotal({
               items: receipt.items,

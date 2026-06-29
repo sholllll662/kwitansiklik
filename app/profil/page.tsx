@@ -33,32 +33,34 @@ export default function ProfilPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-8">
       <p className="text-sm text-muted-foreground">
         Profil dipakai untuk mengisi otomatis kepala kwitansi. Disimpan{" "}
         <strong>lokal di perangkat ini</strong> (localStorage) — bukan di cloud,
         dan akan hilang jika kamu membersihkan data browser.
       </p>
 
-      <ProfileFields
-        profile={profile}
-        error={hasAttemptedSubmit ? businessNameError : undefined}
-        onChange={(patch) => setProfile((prev) => ({ ...prev, ...patch }))}
-      />
-
-      <div className="rounded-xl border border-border bg-card p-4">
-        <LogoUpload
-          logoBase64={profile.logoBase64}
-          onChange={(logoBase64) =>
-            setProfile((prev) => ({ ...prev, logoBase64 }))
-          }
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_280px] lg:items-start">
+        <ProfileFields
+          profile={profile}
+          error={hasAttemptedSubmit ? businessNameError : undefined}
+          onChange={(patch) => setProfile((prev) => ({ ...prev, ...patch }))}
         />
+
+        <div className="rounded-xl border border-border bg-card p-4">
+          <LogoUpload
+            logoBase64={profile.logoBase64}
+            onChange={(logoBase64) =>
+              setProfile((prev) => ({ ...prev, logoBase64 }))
+            }
+          />
+        </div>
       </div>
 
       <button
         type="button"
         onClick={handleSave}
-        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 lg:w-auto lg:self-start lg:px-8"
       >
         Simpan Profil
       </button>

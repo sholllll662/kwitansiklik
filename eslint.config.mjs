@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local Claude Code skill bundles (third-party tooling, not project source).
+    ".claude/**",
   ]),
 ]);
 
