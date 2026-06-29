@@ -184,26 +184,26 @@ export function ReceiptForm() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
-      <p className="text-sm text-foreground/60">
+      <p className="text-sm text-muted-foreground">
         Tanpa akun. Data tidak dikirim ke server.
       </p>
 
-      <section className="flex items-center justify-between gap-3 rounded-xl border border-foreground/10 p-4">
+      <section className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
         <div className="min-w-0">
-          <p className="text-xs text-foreground/60">Profil Penjual</p>
+          <p className="text-xs text-muted-foreground">Profil Penjual</p>
           <p className="truncate text-sm font-medium">
             {profile.businessName || "Belum diisi"}
           </p>
         </div>
         <Link
           href="/profil"
-          className="inline-flex h-11 shrink-0 items-center rounded-full border border-foreground/15 px-4 text-sm font-medium hover:bg-foreground/5"
+          className="inline-flex h-11 shrink-0 items-center rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
         >
           {profile.businessName ? "Ubah" : "Lengkapi profil"}
         </Link>
       </section>
       {hasAttemptedSubmit && businessNameError ? (
-        <p className="text-xs text-red-600">{businessNameError}</p>
+        <p className="text-xs text-destructive">{businessNameError}</p>
       ) : null}
 
       <ReceiptMetaFields
@@ -242,7 +242,7 @@ export function ReceiptForm() {
       <button
         type="button"
         onClick={() => setIsPreviewOpen((prev) => !prev)}
-        className="inline-flex h-11 items-center self-start rounded-full border border-foreground/15 px-4 text-sm font-medium hover:bg-foreground/5"
+        className="inline-flex h-11 items-center self-start rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
       >
         {isPreviewOpen ? "Tutup Pratinjau" : "Lihat Pratinjau"}
       </button>
@@ -252,7 +252,7 @@ export function ReceiptForm() {
           <button
             type="button"
             onClick={() => setPreviewVersion((v) => v + 1)}
-            className="self-end py-2 text-xs text-foreground/60 underline hover:text-foreground"
+            className="self-end py-2 text-xs text-muted-foreground underline hover:text-foreground"
           >
             Perbarui pratinjau dengan data terbaru
           </button>
@@ -266,18 +266,18 @@ export function ReceiptForm() {
         type="button"
         onClick={handleDownload}
         disabled={isGenerating}
-        className="h-12 rounded-full bg-foreground text-sm font-medium text-background transition-colors hover:bg-[#383838] disabled:opacity-50 dark:hover:bg-[#ccc]"
+        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
       >
         {isGenerating ? "Menyiapkan PDF…" : "Unduh PDF"}
       </button>
 
       {downloadSuccess ? (
-        <p className="text-center text-sm text-green-600">
+        <p className="text-center text-sm text-success">
           Kwitansi berhasil diunduh.
         </p>
       ) : null}
       {downloadError ? (
-        <p className="text-center text-sm text-red-600">{downloadError}</p>
+        <p className="text-center text-sm text-destructive">{downloadError}</p>
       ) : null}
     </div>
   );

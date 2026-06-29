@@ -33,11 +33,11 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-xs font-medium text-foreground/70">
+      <span className="text-xs font-medium text-muted-foreground">
         Logo (opsional)
       </span>
       <div className="flex items-center gap-3">
-        <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg border border-foreground/15 bg-foreground/5">
+        <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg border border-border bg-muted">
           {logoBase64 ? (
             // eslint-disable-next-line @next/next/no-img-element -- base64 lokal, bukan aset yang perlu dioptimasi next/image
             <img
@@ -46,11 +46,11 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
               className="h-full w-full object-contain"
             />
           ) : (
-            <span className="text-xs text-foreground/60">Tanpa logo</span>
+            <span className="text-xs text-muted-foreground">Tanpa logo</span>
           )}
         </div>
         <div className="flex flex-col gap-1">
-          <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5">
+          <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-muted">
             {isProcessing
               ? "Memproses…"
               : logoBase64
@@ -68,14 +68,14 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
             <button
               type="button"
               onClick={() => onChange(undefined)}
-              className="py-2 text-left text-xs text-red-600 hover:underline"
+              className="py-2 text-left text-xs text-destructive hover:underline"
             >
               Hapus logo
             </button>
           ) : null}
         </div>
       </div>
-      {error ? <p className="text-xs text-red-600">{error}</p> : null}
+      {error ? <p className="text-xs text-destructive">{error}</p> : null}
     </div>
   );
 }

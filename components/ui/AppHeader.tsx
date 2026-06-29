@@ -15,7 +15,7 @@ export function AppHeader() {
 
   return (
     <header className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 pt-6">
-      <Link href="/" className="text-lg font-bold tracking-tight">
+      <Link href="/" className="text-lg font-bold tracking-tight text-primary">
         KwitansiKlik
       </Link>
       <nav className="flex items-center gap-3 text-sm">
@@ -25,8 +25,8 @@ export function AppHeader() {
             href={item.href}
             className={
               pathname === item.href
-                ? "inline-flex h-11 items-center font-semibold"
-                : "inline-flex h-11 items-center text-foreground/60 hover:text-foreground"
+                ? "inline-flex h-11 items-center font-semibold text-secondary"
+                : "inline-flex h-11 items-center text-muted-foreground hover:text-foreground"
             }
           >
             {item.label}

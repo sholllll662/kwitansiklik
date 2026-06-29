@@ -51,7 +51,7 @@ export default function RiwayatPage() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
-      <p className="text-sm text-foreground/60">
+      <p className="text-sm text-muted-foreground">
         Riwayat tersimpan lokal di perangkat ini, satu daftar per browser.
       </p>
 
@@ -64,7 +64,7 @@ export default function RiwayatPage() {
       />
 
       {filtered.length === 0 ? (
-        <p className="py-8 text-center text-sm text-foreground/60">
+        <p className="py-8 text-center text-sm text-muted-foreground">
           {receipts.length === 0
             ? "Belum ada riwayat kwitansi."
             : "Tidak ada kwitansi yang cocok."}
@@ -81,31 +81,33 @@ export default function RiwayatPage() {
             return (
               <div
                 key={receipt.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-foreground/10 p-3"
+                className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-3"
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium">
                     {receipt.number}
                   </p>
-                  <p className="truncate text-xs text-foreground/60">
+                  <p className="truncate text-xs text-muted-foreground">
                     {formatDate(receipt.date)}
                     {receipt.buyerName ? ` · ${receipt.buyerName}` : ""}
                   </p>
-                  <p className="text-sm font-semibold">{formatRupiah(total)}</p>
+                  <p className="text-sm font-semibold tabular-nums">
+                    {formatRupiah(total)}
+                  </p>
                 </div>
                 <div className="flex shrink-0 gap-2">
                   <button
                     type="button"
                     onClick={() => handleRedownload(receipt)}
                     disabled={downloadingId === receipt.id}
-                    className="inline-flex h-11 items-center rounded-full border border-foreground/15 px-3 text-xs font-medium hover:bg-foreground/5 disabled:opacity-50"
+                    className="inline-flex h-11 items-center rounded-full border border-border px-3 text-xs font-medium hover:bg-muted disabled:opacity-50"
                   >
                     {downloadingId === receipt.id ? "…" : "Unduh"}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(receipt.id)}
-                    className="inline-flex h-11 items-center rounded-full border border-foreground/15 px-3 text-xs font-medium text-red-600 hover:bg-red-50"
+                    className="inline-flex h-11 items-center rounded-full border border-border px-3 text-xs font-medium text-destructive hover:bg-destructive/10"
                   >
                     Hapus
                   </button>

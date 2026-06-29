@@ -26,14 +26,12 @@ export function DiscountTaxFields({
   onTaxPercentChange,
 }: DiscountTaxFieldsProps) {
   return (
-    <section className="flex flex-col gap-4 rounded-xl border border-foreground/10 p-4">
+    <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4">
       <div>
-        <h2 className="mb-2 text-sm font-semibold text-foreground/80">
-          Diskon
-        </h2>
+        <h2 className="mb-2 text-sm font-semibold text-foreground">Diskon</h2>
         <div className="flex items-end gap-2">
           <label className="flex flex-col gap-1">
-            <span className="text-xs font-medium text-foreground/70">
+            <span className="text-xs font-medium text-muted-foreground">
               Jenis
             </span>
             <select
@@ -67,9 +65,9 @@ export function DiscountTaxFields({
             type="checkbox"
             checked={taxEnabled}
             onChange={(e) => onTaxEnabledChange(e.target.checked)}
-            className="h-5 w-5"
+            className="h-5 w-5 accent-secondary"
           />
-          <span className="text-sm font-semibold text-foreground/80">PPN</span>
+          <span className="text-sm font-semibold text-foreground">PPN</span>
         </label>
         {taxEnabled ? (
           <div className="mt-2">

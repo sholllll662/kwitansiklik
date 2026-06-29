@@ -44,7 +44,7 @@ export function InstallButton() {
     <button
       type="button"
       onClick={handleInstall}
-      className="inline-flex h-11 items-center rounded-full bg-foreground px-4 text-sm font-medium text-background hover:bg-[#383838] dark:hover:bg-[#ccc]"
+      className="inline-flex h-11 items-center rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90"
     >
       Install
     </button>

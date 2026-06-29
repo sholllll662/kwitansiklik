@@ -32,7 +32,7 @@ export function ItemsSection({
 
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="text-sm font-semibold text-foreground/80">Item</h2>
+      <h2 className="text-sm font-semibold text-foreground">Item</h2>
 
       <div className="flex flex-col gap-2">
         {items.map((item, index) => (
@@ -48,13 +48,13 @@ export function ItemsSection({
       </div>
 
       {generalError ? (
-        <p className="text-xs text-red-600">{generalError}</p>
+        <p className="text-xs text-destructive">{generalError}</p>
       ) : null}
 
       <button
         type="button"
         onClick={addItem}
-        className="inline-flex h-11 items-center self-start rounded-full border border-foreground/15 px-4 text-sm font-medium hover:bg-foreground/5"
+        className="inline-flex h-11 items-center self-start rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
       >
         + Tambah Item
       </button>

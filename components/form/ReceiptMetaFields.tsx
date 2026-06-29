@@ -22,14 +22,12 @@ export function ReceiptMetaFields({
   onBuyerNameChange,
 }: ReceiptMetaFieldsProps) {
   return (
-    <section className="flex flex-col gap-3 rounded-xl border border-foreground/10 p-4">
-      <h2 className="text-sm font-semibold text-foreground/80">
-        Detail Kwitansi
-      </h2>
+    <section className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
+      <h2 className="text-sm font-semibold text-foreground">Detail Kwitansi</h2>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-foreground/70">
+          <span className="text-xs font-medium text-muted-foreground">
             Nomor kwitansi
           </span>
           <input
@@ -38,13 +36,13 @@ export function ReceiptMetaFields({
             onChange={(e) => onNumberChange(e.target.value)}
             className={TEXT_INPUT_CLASS}
           />
-          <span className="text-[11px] text-foreground/60">
+          <span className="text-[11px] text-muted-foreground">
             Format: {numberFormat} (ubah di Pengaturan)
           </span>
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-foreground/70">
+          <span className="text-xs font-medium text-muted-foreground">
             Tanggal
           </span>
           <input
@@ -57,7 +55,7 @@ export function ReceiptMetaFields({
       </div>
 
       <label className="flex flex-col gap-1">
-        <span className="text-xs font-medium text-foreground/70">
+        <span className="text-xs font-medium text-muted-foreground">
           Nama pembeli (opsional)
         </span>
         <input

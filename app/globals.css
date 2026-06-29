@@ -12,16 +12,49 @@ html {
   color-scheme: light;
 }
 
+/*
+ * Sistem warna semantik — diturunkan dari palet referensi "Invoice & Billing
+ * Tool" (navy profesional + biru brand existing + hijau "lunas"). Primary
+ * (navy) dipakai khusus untuk CTA utama, secondary (biru) untuk status
+ * terpilih/fokus agar hierarki aksi tetap jelas.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --primary: #1e3a5f;
+  --primary-foreground: #ffffff;
+  --secondary: #2563eb;
+  --secondary-foreground: #ffffff;
+  --success: #059669;
+  --success-foreground: #ffffff;
+  --muted: #f1f3f5;
+  --muted-foreground: #64748b;
+  --border: #e4e7eb;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --ring: #1e3a5f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-inter);
 }
 
 body {

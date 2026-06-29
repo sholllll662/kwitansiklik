@@ -15,13 +15,11 @@ export function ProfileFields({
   onChange,
 }: ProfileFieldsProps) {
   return (
-    <section className="flex flex-col gap-3 rounded-xl border border-foreground/10 p-4">
-      <h2 className="text-sm font-semibold text-foreground/80">
-        Profil Penjual
-      </h2>
+    <section className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
+      <h2 className="text-sm font-semibold text-foreground">Profil Penjual</h2>
 
       <label className="flex flex-col gap-1">
-        <span className="text-xs font-medium text-foreground/70">
+        <span className="text-xs font-medium text-muted-foreground">
           Nama bisnis *
         </span>
         <input
@@ -32,11 +30,11 @@ export function ProfileFields({
           className={TEXT_INPUT_CLASS}
         />
       </label>
-      {error ? <p className="text-xs text-red-600">{error}</p> : null}
+      {error ? <p className="text-xs text-destructive">{error}</p> : null}
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-foreground/70">
+          <span className="text-xs font-medium text-muted-foreground">
             Nama pemilik
           </span>
           <input
@@ -47,7 +45,7 @@ export function ProfileFields({
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-foreground/70">
+          <span className="text-xs font-medium text-muted-foreground">
             No. telp/WA
           </span>
           <input
@@ -60,7 +58,9 @@ export function ProfileFields({
       </div>
 
       <label className="flex flex-col gap-1">
-        <span className="text-xs font-medium text-foreground/70">Alamat</span>
+        <span className="text-xs font-medium text-muted-foreground">
+          Alamat
+        </span>
         <input
           type="text"
           value={profile.address ?? ""}

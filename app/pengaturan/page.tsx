@@ -33,12 +33,12 @@ export default function PengaturanPage() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
-      <p className="text-sm text-foreground/60">
+      <p className="text-sm text-muted-foreground">
         Pengaturan ini dipakai sebagai default saat membuat kwitansi baru.
         Disimpan lokal di perangkat ini.
       </p>
 
-      <section className="flex flex-col gap-4 rounded-xl border border-foreground/10 p-4">
+      <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4">
         <NumericTextField
           label="PPN default (%)"
           value={taxPercentInput}
@@ -47,7 +47,7 @@ export default function PengaturanPage() {
         />
 
         <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-foreground/70">
+          <span className="text-xs font-medium text-muted-foreground">
             Format nomor kwitansi
           </span>
           <input
@@ -58,13 +58,13 @@ export default function PengaturanPage() {
             }
             className={TEXT_INPUT_CLASS}
           />
-          <span className="text-[11px] text-foreground/60">
+          <span className="text-[11px] text-muted-foreground">
             Placeholder: {"{YYYY}"} {"{YY}"} {"{MM}"} {"{DD}"} dan {"{NNN}"}{" "}
             (jumlah N = lebar padding nol)
           </span>
         </label>
 
-        <p className="text-xs text-foreground/60">
+        <p className="text-xs text-muted-foreground">
           Mata uang: IDR — dukungan multi-mata uang direncanakan di versi
           mendatang.
         </p>
@@ -73,13 +73,13 @@ export default function PengaturanPage() {
       <button
         type="button"
         onClick={handleSave}
-        className="h-12 rounded-full bg-foreground text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
       >
         Simpan Pengaturan
       </button>
 
       {saved ? (
-        <p className="text-center text-sm text-green-600">
+        <p className="text-center text-sm text-success">
           Pengaturan tersimpan.
         </p>
       ) : null}

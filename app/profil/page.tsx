@@ -34,7 +34,7 @@ export default function ProfilPage() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-8">
-      <p className="text-sm text-foreground/60">
+      <p className="text-sm text-muted-foreground">
         Profil dipakai untuk mengisi otomatis kepala kwitansi. Disimpan{" "}
         <strong>lokal di perangkat ini</strong> (localStorage) — bukan di cloud,
         dan akan hilang jika kamu membersihkan data browser.
@@ -46,7 +46,7 @@ export default function ProfilPage() {
         onChange={(patch) => setProfile((prev) => ({ ...prev, ...patch }))}
       />
 
-      <div className="rounded-xl border border-foreground/10 p-4">
+      <div className="rounded-xl border border-border bg-card p-4">
         <LogoUpload
           logoBase64={profile.logoBase64}
           onChange={(logoBase64) =>
@@ -58,13 +58,13 @@ export default function ProfilPage() {
       <button
         type="button"
         onClick={handleSave}
-        className="h-12 rounded-full bg-foreground text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+        className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
       >
         Simpan Profil
       </button>
 
       {saved ? (
-        <p className="text-center text-sm text-green-600">
+        <p className="text-center text-sm text-success">
           Profil tersimpan.{" "}
           <Link href="/" className="underline">
             Kembali ke form kwitansi

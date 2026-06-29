@@ -23,11 +23,13 @@ export function NumericTextField({
   return (
     <label className={`flex flex-col gap-1 ${className ?? ""}`}>
       {label ? (
-        <span className="text-xs font-medium text-foreground/70">{label}</span>
+        <span className="text-xs font-medium text-muted-foreground">
+          {label}
+        </span>
       ) : null}
-      <div className="flex items-center gap-1 rounded-lg border border-foreground/15 px-3 py-2 focus-within:border-foreground/40 focus-within:ring-2 focus-within:ring-[#2563EB]/30">
+      <div className="flex items-center gap-1 rounded-lg border border-border bg-card px-3 py-2 focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/30">
         {prefix ? (
-          <span className="text-sm text-foreground/60">{prefix}</span>
+          <span className="text-sm text-muted-foreground">{prefix}</span>
         ) : null}
         <input
           type="text"
@@ -37,7 +39,7 @@ export function NumericTextField({
           placeholder={placeholder}
           aria-label={ariaLabel ?? label}
           onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
-          className="w-full bg-transparent text-right text-sm outline-none"
+          className="w-full bg-transparent text-right text-sm tabular-nums outline-none"
         />
       </div>
     </label>
