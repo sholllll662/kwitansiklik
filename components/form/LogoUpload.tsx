@@ -50,7 +50,7 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
           )}
         </div>
         <div className="flex flex-col gap-1">
-          <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-muted">
+          <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full border border-border px-4 py-2 text-sm font-medium focus-within:ring-2 focus-within:ring-secondary/40 focus-within:outline-none hover:bg-muted">
             {isProcessing
               ? "Memproses…"
               : logoBase64
@@ -59,7 +59,7 @@ export function LogoUpload({ logoBase64, onChange }: LogoUploadProps) {
             <input
               type="file"
               accept="image/*"
-              className="hidden"
+              className="sr-only"
               disabled={isProcessing}
               onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
             />

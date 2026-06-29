@@ -13,19 +13,19 @@ html {
 }
 
 /*
- * Sistem warna semantik — diturunkan dari palet referensi "Invoice & Billing
- * Tool" (navy profesional + biru brand existing + hijau "lunas"). Primary
- * (navy) dipakai khusus untuk CTA utama, secondary (biru) untuk status
- * terpilih/fokus agar hierarki aksi tetap jelas.
+ * Sistem warna semantik — diturunkan dari palet referensi "Banking/Traditional
+ * Finance" (navy tepercaya + emas premium). Primary (emas) dipakai khusus
+ * untuk CTA utama agar menonjol, secondary (biru tua) untuk status
+ * terpilih/fokus/identitas brand agar hierarki aksi tetap jelas.
  */
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
-  --primary: #1e3a5f;
+  --primary: #a16207;
   --primary-foreground: #ffffff;
-  --secondary: #2563eb;
+  --secondary: #1e3a8a;
   --secondary-foreground: #ffffff;
   --success: #059669;
   --success-foreground: #ffffff;
@@ -34,7 +34,7 @@ html {
   --border: #e4e7eb;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --ring: #1e3a5f;
+  --ring: #1e3a8a;
 }
 
 @theme inline {
@@ -61,4 +61,44 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/*
+ * Tailwind preflight men-set cursor:default di <button> (meniru perilaku
+ * native Safari) — di sini dikembalikan ke pointer/not-allowed sesuai
+ * ekspektasi umum web. Ditaruh global (bukan per-komponen) supaya semua
+ * tombol konsisten, termasuk yang ditambah nanti.
+ */
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Transisi warna halus & konsisten untuk semua elemen interaktif (150-300ms). */
+a,
+button {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+/* Ring fokus seragam untuk elemen yang belum punya penanganan outline sendiri. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
