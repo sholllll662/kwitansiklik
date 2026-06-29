@@ -85,9 +85,17 @@ const styles = StyleSheet.create({
     borderTopColor: COLOR_LINE,
   },
   colItem: { flexGrow: 1, flexBasis: 0 },
-  colQty: { width: 32, textAlign: "right", fontFamily: PDF_MONO_FONT_FAMILY },
-  colPrice: { width: 80, textAlign: "right", fontFamily: PDF_MONO_FONT_FAMILY },
-  colTotal: { width: 80, textAlign: "right", fontFamily: PDF_MONO_FONT_FAMILY },
+  colQty: { width: 28, textAlign: "right", fontFamily: PDF_MONO_FONT_FAMILY },
+  colPrice: {
+    width: 105,
+    textAlign: "right",
+    fontFamily: PDF_MONO_FONT_FAMILY,
+  },
+  colTotal: {
+    width: 105,
+    textAlign: "right",
+    fontFamily: PDF_MONO_FONT_FAMILY,
+  },
   summaryBlock: {
     alignSelf: "flex-end",
     width: 200,

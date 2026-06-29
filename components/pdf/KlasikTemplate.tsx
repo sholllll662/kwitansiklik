@@ -109,9 +109,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   colItem: { flexGrow: 1, flexBasis: 0 },
-  colQty: { width: 36, textAlign: "right" },
-  colPrice: { width: 85, textAlign: "right" },
-  colTotal: { width: 85, textAlign: "right" },
+  colQty: { width: 32, textAlign: "right" },
+  colPrice: { width: 115, textAlign: "right" },
+  colTotal: { width: 115, textAlign: "right" },
   summaryRow: {
     flexDirection: "row",
     justifyContent: "flex-end",

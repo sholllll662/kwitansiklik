@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/*
+ * Tema gelap sengaja belum didukung — belum pernah dirancang/diuji secara
+ * sadar (cuma boilerplate create-next-app), dan kalau dibiarkan otomatis
+ * ikut prefers-color-scheme, kontrol form native browser (input, select)
+ * bisa ganti gaya gelap sendiri tanpa selaras dengan styling kustom kita,
+ * jadi sulit dibaca. `color-scheme: light` memaksa browser pakai gaya
+ * kontrol form terang secara konsisten, di semua perangkat.
+ */
+html {
+  color-scheme: light;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,13 +22,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
