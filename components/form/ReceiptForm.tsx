@@ -184,24 +184,61 @@ export function ReceiptForm() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8">
-      <p className="text-sm text-muted-foreground">
-        Tanpa akun. Data tidak dikirim ke server.
-      </p>
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-4 w-4 shrink-0"
+          aria-hidden="true"
+        >
+          <path d="M10 2l6 2.5v4c0 3.5-2.5 6.5-6 7.5-3.5-1-6-4-6-7.5v-4L10 2z" />
+          <path d="M7.5 10.5l2 2 3.5-3.5" />
+        </svg>
+        <p>Tanpa akun. Data tidak dikirim ke server.</p>
+      </div>
 
       <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px] lg:items-start">
         <div className="flex flex-col gap-4">
           <section className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4">
             <div className="min-w-0">
-              <p className="text-xs text-muted-foreground">Profil Penjual</p>
-              <p className="truncate text-sm font-medium">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Profil Penjual
+              </p>
+              <p
+                className={`truncate text-sm font-semibold ${
+                  profile.businessName ? "text-secondary" : "text-muted-foreground"
+                }`}
+              >
                 {profile.businessName || "Belum diisi"}
               </p>
             </div>
             <Link
               href="/profil"
-              className="inline-flex h-11 shrink-0 items-center rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
+              className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
             >
-              {profile.businessName ? "Ubah" : "Lengkapi profil"}
+              {profile.businessName ? (
+                <>
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-3.5 w-3.5"
+                    aria-hidden="true"
+                  >
+                    <path d="M14.5 2.5a2.121 2.121 0 013 3L6 17H3v-3L14.5 2.5z" />
+                  </svg>
+                  Ubah
+                </>
+              ) : (
+                "Lengkapi profil"
+              )}
             </Link>
           </section>
           {hasAttemptedSubmit && businessNameError ? (
@@ -244,8 +281,31 @@ export function ReceiptForm() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen((prev) => !prev)}
-            className="inline-flex h-11 items-center self-start rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
+            className="inline-flex h-11 items-center gap-2 self-start rounded-full border border-border px-4 text-sm font-medium hover:bg-muted"
           >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-4 w-4"
+              aria-hidden="true"
+            >
+              {isPreviewOpen ? (
+                <>
+                  <path d="M2 10s3.5-5.5 8-5.5S18 10 18 10s-3.5 5.5-8 5.5S2 10 2 10z" />
+                  <circle cx="10" cy="10" r="2.5" />
+                  <line x1="3" y1="3" x2="17" y2="17" />
+                </>
+              ) : (
+                <>
+                  <path d="M2 10s3.5-5.5 8-5.5S18 10 18 10s-3.5 5.5-8 5.5S2 10 2 10z" />
+                  <circle cx="10" cy="10" r="2.5" />
+                </>
+              )}
+            </svg>
             {isPreviewOpen ? "Tutup Pratinjau" : "Lihat Pratinjau"}
           </button>
 
@@ -264,14 +324,33 @@ export function ReceiptForm() {
         </div>
 
         <div className="flex flex-col gap-4 lg:sticky lg:top-6">
-          <SummaryCard totals={totals} />
+          <SummaryCard
+            totals={totals}
+            taxEnabled={taxEnabled}
+            taxPercent={Number(taxPercent || 0)}
+          />
 
           <button
             type="button"
             onClick={handleDownload}
             disabled={isGenerating}
-            className="h-12 rounded-full bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-secondary text-sm font-medium text-secondary-foreground transition-colors hover:bg-secondary/90 disabled:opacity-50"
           >
+            {!isGenerating ? (
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path d="M10 3v11M5 10l5 5 5-5" />
+                <path d="M3 17h14" />
+              </svg>
+            ) : null}
             {isGenerating ? "Menyiapkan PDF…" : "Unduh PDF"}
           </button>
 
@@ -285,6 +364,26 @@ export function ReceiptForm() {
               {downloadError}
             </p>
           ) : null}
+
+          <div className="flex gap-3 rounded-xl bg-secondary/10 p-4">
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mt-0.5 h-4 w-4 shrink-0 text-secondary"
+              aria-hidden="true"
+            >
+              <circle cx="10" cy="10" r="8" />
+              <path d="M10 9v5M10 7h.01" />
+            </svg>
+            <p className="text-xs leading-relaxed text-secondary/80">
+              Format PDF dikirim langsung ke perangkat Anda tanpa melalui server
+              pihak ketiga untuk privasi maksimal.
+            </p>
+          </div>
         </div>
       </div>
     </div>
